@@ -55,6 +55,7 @@ npm run dev
 
 ### 404（NOT_FOUND）になるとき
 
+- **Project Settings → Build and Deployment の Framework Preset が `Other` のまま**だと、Next.js として正しく配信されず 404 になることがあります。**`Next.js`** にするか、リポジトリ直下の [`vercel.json`](vercel.json) の `"framework": "nextjs"` がデプロイに反映されているか確認してください。
 - **`sunhome-sisaku-xxxx.vercel.app` のようなプレビュー専用 URL**は、古いデプロイが削除されると無効になることがあります。**ダッシュボードの Production の Visit URL** を使い直してください。
 - まだ **Successful なデプロイが一度もない**場合も 404 になります。ビルドログでエラー（環境変数不足、`migrate deploy` 失敗など）を解消してください。
 
