@@ -96,3 +96,24 @@ export async function PUT(request: Request) {
     );
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const payload = (await request.json()) as { id?: number };
+
+    if (!payload.id) {
+      return NextResponse.json({ error: "id is required" }, { status: 400 });
+    }
+
+    await prisma.policy.delete({
+      where: { id: payload.id },
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete policy", detail: String(error) },
+      { status: 500 },
+    );
+  }
+}
