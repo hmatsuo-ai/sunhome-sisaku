@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PolicyComments } from "@/components/policies/PolicyComments";
 import type { Policy } from "./types";
 
 type PolicyDetailProps = {
@@ -68,6 +69,8 @@ export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
           <LongText label="施策による効果" value={policy.effect} />
           <LongText label="備考" value={policy.notes} />
         </div>
+
+        <PolicyComments key={policy.id} policyId={policy.id} />
       </div>
     </section>
   );
