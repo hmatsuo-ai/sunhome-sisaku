@@ -40,8 +40,8 @@ export default function EditPolicyPage() {
 
   if (!policy) {
     return (
-      <main className="min-h-screen bg-blue-50 px-4 py-8">
-        <div className="mx-auto max-w-3xl rounded-xl border border-blue-100 bg-white p-6 text-slate-500">
+      <main className="min-h-screen bg-stone-200/80 px-4 py-8">
+        <div className="mx-auto max-w-3xl rounded-xl border border-stone-300/80 bg-stone-50/95 p-6 text-stone-600">
           読み込み中...
         </div>
       </main>
@@ -49,13 +49,13 @@ export default function EditPolicyPage() {
   }
 
   return (
-    <main className="min-h-screen bg-blue-50 px-4 py-8">
-      <div className="mx-auto max-w-3xl rounded-xl border border-blue-100 bg-white p-5 shadow-sm md:p-8">
+    <main className="min-h-screen bg-stone-200/80 px-4 py-8">
+      <div className="mx-auto max-w-3xl rounded-xl border border-stone-300/80 bg-stone-50/95 p-5 shadow-sm md:p-8">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-blue-950">施策の編集</h1>
+          <h1 className="text-2xl font-semibold text-stone-900">施策の編集</h1>
           <Link
             href="/"
-            className="rounded-md border border-blue-200 px-3 py-1.5 text-sm text-blue-700 hover:bg-blue-50"
+            className="rounded-md border border-stone-300 bg-stone-100/80 px-3 py-1.5 text-sm text-stone-800 hover:bg-stone-200/80"
           >
             一覧へ戻る
           </Link>

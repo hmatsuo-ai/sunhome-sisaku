@@ -104,7 +104,7 @@ export function PolicyForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-md bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+        className="rounded-md bg-stone-700 px-4 py-2 font-medium text-stone-50 hover:bg-stone-800 disabled:cursor-not-allowed disabled:bg-stone-400"
       >
         {submitting ? "保存中..." : submitLabel}
       </button>
@@ -125,12 +125,12 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-blue-900">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-stone-800">{label}</span>
       <input
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-md border border-blue-200 px-3 py-2 outline-none ring-blue-500 focus:ring"
+        className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
       />
     </label>
   );
@@ -149,13 +149,13 @@ function TextArea({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-blue-900">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-stone-800">{label}</span>
       <textarea
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={4}
-        className="w-full rounded-md border border-blue-200 px-3 py-2 outline-none ring-blue-500 focus:ring"
+        className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
       />
     </label>
   );
@@ -174,11 +174,11 @@ function SelectField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-blue-900">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-stone-800">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-md border border-blue-200 bg-white px-3 py-2 outline-none ring-blue-500 focus:ring"
+        className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

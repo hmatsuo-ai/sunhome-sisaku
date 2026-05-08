@@ -23,31 +23,31 @@ const statusLabel: Record<Policy["status"], string> = {
 export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
   if (!policy) {
     return (
-      <section className="flex flex-1 items-center justify-center bg-blue-50/30 p-6 text-slate-500">
+      <section className="flex flex-1 items-center justify-center bg-stone-200/50 p-6 text-stone-600">
         左の一覧から施策を選択してください。
       </section>
     );
   }
 
   return (
-    <section className="flex flex-1 flex-col bg-blue-50/30 p-5 md:p-8">
+    <section className="flex flex-1 flex-col bg-stone-200/50 p-5 md:p-8">
       <button
         type="button"
         onClick={onBackToList}
-        className="mb-4 w-fit rounded-md border border-blue-200 bg-white px-3 py-1.5 text-sm text-blue-700 md:hidden"
+        className="mb-4 w-fit rounded-md border border-stone-300 bg-stone-100 px-3 py-1.5 text-sm text-stone-800 md:hidden"
       >
         一覧に戻る
       </button>
 
-      <div className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
-        <h1 className="text-2xl font-bold text-blue-950">{policy.name}</h1>
-        <p className="mt-2 text-sm text-slate-500">
+      <div className="rounded-xl border border-stone-300/80 bg-stone-50/95 p-5 shadow-sm">
+        <h1 className="text-2xl font-semibold text-stone-900">{policy.name}</h1>
+        <p className="mt-2 text-sm text-stone-600">
           最終更新日: {new Date(policy.updatedAt).toLocaleDateString("ja-JP")}
         </p>
         <div className="mt-4">
           <Link
             href={`/policies/${policy.id}/edit`}
-            className="inline-flex rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+            className="inline-flex rounded-md bg-stone-700 px-3 py-1.5 text-sm font-medium text-stone-50 hover:bg-stone-800"
           >
             編集
           </Link>
@@ -75,9 +75,9 @@ export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
 
 function DetailItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-blue-100 bg-blue-50/30 p-3">
-      <dt className="text-xs font-medium tracking-wide text-blue-700">{label}</dt>
-      <dd className="mt-1 text-sm text-slate-700">{value}</dd>
+    <div className="rounded-lg border border-stone-300/60 bg-stone-200/40 p-3">
+      <dt className="text-xs font-medium tracking-wide text-stone-600">{label}</dt>
+      <dd className="mt-1 text-sm text-stone-800">{value}</dd>
     </div>
   );
 }
@@ -85,8 +85,8 @@ function DetailItem({ label, value }: { label: string; value: string }) {
 function LongText({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold text-blue-900">{label}</h3>
-      <p className="mt-1 whitespace-pre-wrap rounded-lg border border-blue-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+      <h3 className="text-sm font-semibold text-stone-800">{label}</h3>
+      <p className="mt-1 whitespace-pre-wrap rounded-lg border border-stone-300/60 bg-stone-100/80 p-3 text-sm leading-6 text-stone-800">
         {value}
       </p>
     </div>
