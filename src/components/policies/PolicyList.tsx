@@ -53,7 +53,7 @@ export function PolicyList({
                 className={`h-2.5 w-2.5 flex-none rounded-full ${statusStyle[policy.status]}`}
               />
               <span className="min-w-0 flex-1 truncate font-medium text-stone-900">
-                {policy.name}
+                {policy.name.trim() || "（名称未設定）"}
               </span>
               <span className="text-xs text-stone-600">
                 {statusLabel[policy.status]}

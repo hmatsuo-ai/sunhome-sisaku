@@ -114,7 +114,6 @@ export function PolicyComments({ policyId }: PolicyCommentsProps) {
             コメント
           </span>
           <textarea
-            required
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={3}

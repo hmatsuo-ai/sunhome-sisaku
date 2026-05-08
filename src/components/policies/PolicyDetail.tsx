@@ -41,7 +41,9 @@ export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
       </button>
 
       <div className="rounded-xl border border-stone-300/80 bg-stone-50/95 p-5 shadow-sm">
-        <h1 className="text-2xl font-semibold text-stone-900">{policy.name}</h1>
+        <h1 className="text-2xl font-semibold text-stone-900">
+          {policy.name.trim() || "（名称未設定）"}
+        </h1>
         <p className="mt-2 text-sm text-stone-600">
           最終更新日: {new Date(policy.updatedAt).toLocaleDateString("ja-JP")}
         </p>
@@ -77,20 +79,30 @@ export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
 }
 
 function DetailItem({ label, value }: { label: string; value: string }) {
+  const empty = value.trim() === "";
   return (
     <div className="rounded-lg border border-stone-300/60 bg-stone-200/40 p-3">
       <dt className="text-xs font-medium tracking-wide text-stone-600">{label}</dt>
-      <dd className="mt-1 text-sm text-stone-800">{value}</dd>
+      <dd
+        className={`mt-1 text-sm ${empty ? "text-stone-400 italic" : "text-stone-800"}`}
+      >
+        {empty ? "—" : value}
+      </dd>
     </div>
   );
 }
 
 function LongText({ label, value }: { label: string; value: string }) {
+  const empty = value.trim() === "";
   return (
     <div>
       <h3 className="text-sm font-semibold text-stone-800">{label}</h3>
-      <p className="mt-1 whitespace-pre-wrap rounded-lg border border-stone-300/60 bg-stone-100/80 p-3 text-sm leading-6 text-stone-800">
-        {value}
+      <p
+        className={`mt-1 whitespace-pre-wrap rounded-lg border border-stone-300/60 bg-stone-100/80 p-3 text-sm leading-6 ${
+          empty ? "text-stone-400 italic" : "text-stone-800"
+        }`}
+      >
+        {empty ? "—" : value}
       </p>
     </div>
   );

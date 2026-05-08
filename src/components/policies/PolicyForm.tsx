@@ -46,14 +46,13 @@ export function PolicyForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <Field label="施策の名前" value={form.name} onChange={(v) => setForm({ ...form, name: v })} required />
+      <Field label="施策の名前" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
       <Field
         label="依頼者の名前"
         value={form.requesterName}
         onChange={(v) => setForm({ ...form, requesterName: v })}
-        required
       />
-      <Field label="担当者" value={form.ownerName} onChange={(v) => setForm({ ...form, ownerName: v })} required />
+      <Field label="担当者" value={form.ownerName} onChange={(v) => setForm({ ...form, ownerName: v })} />
       <SelectField
         label="優先順位"
         value={form.priority}
@@ -78,28 +77,24 @@ export function PolicyForm({
         label="これまでの問題点"
         value={form.pastIssues}
         onChange={(v) => setForm({ ...form, pastIssues: v })}
-        required
       />
       <TextArea
         label="システムの内容"
         value={form.systemDescription}
         onChange={(v) => setForm({ ...form, systemDescription: v })}
-        required
       />
-      <TextArea label="施策による効果" value={form.effect} onChange={(v) => setForm({ ...form, effect: v })} required />
+      <TextArea label="施策による効果" value={form.effect} onChange={(v) => setForm({ ...form, effect: v })} />
       <Field
         label="予想工期"
         value={form.estimatedDuration}
         onChange={(v) => setForm({ ...form, estimatedDuration: v })}
-        required
       />
       <Field
         label="実際の工期"
         value={form.actualDuration}
         onChange={(v) => setForm({ ...form, actualDuration: v })}
-        required
       />
-      <TextArea label="備考" value={form.notes} onChange={(v) => setForm({ ...form, notes: v })} required />
+      <TextArea label="備考" value={form.notes} onChange={(v) => setForm({ ...form, notes: v })} />
 
       <button
         type="submit"
