@@ -5,7 +5,7 @@ PC / スマホ / タブレットでの利用を想定したレスポンシブ UI
 
 ## 主な機能
 
-- 左ペインに施策名一覧を表示（ステータスを色で判別）
+- 左ペインに施策名一覧を表示（ステータス色で判別）
 - 施策を選択すると詳細を表示（モバイルでは一覧を非表示）
 - 新規作成フォームで全項目を登録
 - 編集画面で既存施策を更新
@@ -16,7 +16,7 @@ PC / スマホ / タブレットでの利用を想定したレスポンシブ UI
 - Next.js (App Router / TypeScript)
 - Tailwind CSS
 - Prisma
-- Vercel Postgres
+- SQLite（ファイルベースの SQL データベース）
 
 ## ローカル開発
 
@@ -28,15 +28,18 @@ npm install
 
 2. 環境変数を設定
 
-`.env.example` をコピーして `.env` を作成し、`DATABASE_URL` を設定します。
+`.env.example` をコピーして `.env` を作成します。
 
 ```bash
 cp .env.example .env
 ```
 
-3. Prisma Client 生成
+`DATABASE_URL` は既定で `file:./dev.db`（`prisma` フォルダ直下に `dev.db` が作成されます）。
+
+3. マイグレーション適用と Prisma Client 生成
 
 ```bash
+npx prisma migrate deploy
 npx prisma generate
 ```
 
@@ -48,16 +51,17 @@ npm run dev
 
 ## マイグレーション
 
-初期 SQL は `prisma/migrations/0001_init/migration.sql` にあります。  
-Vercel Postgres 接続後、必要に応じて以下を実行してください。
+初期マイグレーションは `prisma/migrations/20260508000000_init_sqlite/migration.sql` です。  
+スキーマ変更後は `npx prisma migrate dev --name 変更内容` で新しいマイグレーションを作成してください。
 
-```bash
-npx prisma migrate deploy
-```
+## Vercel について
 
-## Git / Vercel デプロイ
+Vercel のサーバーレス環境では **SQLite ファイルの永続化ができない**ため、このまま本番デプロイすると DB が期待どおり動きません。  
+本番でファイル SQL を使う場合は **Turso** などリモート SQLite、または **PostgreSQL** 等のマネージド DB に切り替えてください。
+
+## Git / デプロイ（参考）
 
 1. GitHub に push
-2. Vercel でリポジトリを import
-3. Vercel Project Settings > Environment Variables に `DATABASE_URL` を設定
-4. デプロイ後、作成/更新/表示ができることを確認
+2. ホスティング先でリポジトリを接続
+3. 本番用の `DATABASE_URL` をホストの要件に合わせて設定
+4. ビルド前後に `prisma migrate deploy` と `prisma generate` を実行するよう設定（プラットフォームにより異なります）
