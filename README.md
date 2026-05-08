@@ -45,10 +45,26 @@ npm run dev
 
 ## Vercel デプロイ
 
-1. リポジトリを Vercel に接続
-2. Neon を Marketplace から Connect し、`DATABASE_URL` と `DATABASE_URL_UNPOOLED` を設定
-3. `npm run build` 内で `prisma migrate deploy` が実行されます（初回デプロイでテーブルが作成されます）
+1. [Vercel Dashboard](https://vercel.com/dashboard) で GitHub リポジトリ（例: `hmatsuo-ai/sunhome-sisaku`）を Import
+2. **Root Directory** はリポジトリ直下（この Next アプリがルートの場合はそのまま）
+3. [Neon](https://vercel.com/marketplace/neon) を Marketplace から **Connect** し、プロジェクトに紐づける  
+   - 連携後、**`DATABASE_URL`**（プール）と **`DATABASE_URL_UNPOOLED`**（直結）が環境変数に入ることが多いです  
+   - **Production** と **Preview** の両方に同じキーが付いているか確認してください（プレビューだけ欠けると PR デプロイで DB エラーになります）
+4. デプロイの **Build Command** は既定の `npm run build` のままで構いません（中で `prisma migrate deploy` → `prisma generate` → `next build` が実行されます）
+5. 初回デプロイ後、**Deployments** で最新が **Ready** であることを確認し、**Production の「Visit」** から開いてください
+
+### 404（NOT_FOUND）になるとき
+
+- **`sunhome-sisaku-xxxx.vercel.app` のようなプレビュー専用 URL**は、古いデプロイが削除されると無効になることがあります。**ダッシュボードの Production の Visit URL** を使い直してください。
+- まだ **Successful なデプロイが一度もない**場合も 404 になります。ビルドログでエラー（環境変数不足、`migrate deploy` 失敗など）を解消してください。
+
+### CLI からデプロイする場合
+
+```bash
+npx vercel login
+npx vercel --prod
+```
 
 ## Git
 
-GitHub: リポジトリに push 後、Vercel が自動ビルドします。
+GitHub に push すると、Vercel が連携済みなら自動でビルド・デプロイされます。
