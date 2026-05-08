@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 enum Priority {
@@ -29,12 +30,12 @@ model Policy {
   ownerName         String
   priority          Priority
   status            PolicyStatus
-  pastIssues        String
-  systemDescription String
-  effect            String
+  pastIssues        String   @db.Text
+  systemDescription String   @db.Text
+  effect            String   @db.Text
   estimatedDuration String
   actualDuration    String
-  notes             String
+  notes             String   @db.Text
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
 }

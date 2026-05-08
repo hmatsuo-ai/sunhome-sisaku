@@ -16,52 +16,39 @@ PC / スマホ / タブレットでの利用を想定したレスポンシブ UI
 - Next.js (App Router / TypeScript)
 - Tailwind CSS
 - Prisma
-- SQLite（ファイルベースの SQL データベース）
+- PostgreSQL（[Neon](https://neon.tech) + Vercel Marketplace 連携想定）
+
+## 環境変数（最低限）
+
+| 名前 | 用途 |
+|------|------|
+| `DATABASE_URL` | プール接続（アプリ実行時） |
+| `DATABASE_URL_UNPOOLED` | 直結（`prisma migrate` 用） |
+
+Vercel で Neon を Connect すると、上記がプロジェクトに注入されることが多いです。  
+ローカルでは `.env.example` を `.env` にコピーし、Neon ダッシュボードの接続文字列を貼り付けてください。
 
 ## ローカル開発
 
-1. 依存関係のインストール
-
 ```bash
 npm install
-```
-
-2. 環境変数を設定
-
-`.env.example` をコピーして `.env` を作成します。
-
-```bash
 cp .env.example .env
-```
-
-`DATABASE_URL` は既定で `file:./dev.db`（`prisma` フォルダ直下に `dev.db` が作成されます）。
-
-3. マイグレーション適用と Prisma Client 生成
-
-```bash
+# .env に Neon の DATABASE_URL / DATABASE_URL_UNPOOLED を設定
 npx prisma migrate deploy
 npx prisma generate
-```
-
-4. 開発サーバ起動
-
-```bash
 npm run dev
 ```
 
 ## マイグレーション
 
-初期マイグレーションは `prisma/migrations/20260508000000_init_sqlite/migration.sql` です。  
-スキーマ変更後は `npx prisma migrate dev --name 変更内容` で新しいマイグレーションを作成してください。
+初期マイグレーションは `prisma/migrations/20260508130000_init_postgres/migration.sql` です。
 
-## Vercel について
+## Vercel デプロイ
 
-Vercel のサーバーレス環境では **SQLite ファイルの永続化ができない**ため、このまま本番デプロイすると DB が期待どおり動きません。  
-本番でファイル SQL を使う場合は **Turso** などリモート SQLite、または **PostgreSQL** 等のマネージド DB に切り替えてください。
+1. リポジトリを Vercel に接続
+2. Neon を Marketplace から Connect し、`DATABASE_URL` と `DATABASE_URL_UNPOOLED` を設定
+3. `npm run build` 内で `prisma migrate deploy` が実行されます（初回デプロイでテーブルが作成されます）
 
-## Git / デプロイ（参考）
+## Git
 
-1. GitHub に push
-2. ホスティング先でリポジトリを接続
-3. 本番用の `DATABASE_URL` をホストの要件に合わせて設定
-4. ビルド前後に `prisma migrate deploy` と `prisma generate` を実行するよう設定（プラットフォームにより異なります）
+GitHub: リポジトリに push 後、Vercel が自動ビルドします。
