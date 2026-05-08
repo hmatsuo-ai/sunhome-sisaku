@@ -99,7 +99,7 @@ export function PolicyForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-md bg-stone-700 px-4 py-2 font-medium text-stone-50 hover:bg-stone-800 disabled:cursor-not-allowed disabled:bg-stone-400"
+        className="rounded-lg bg-[var(--accent)] px-4 py-2.5 font-medium text-white shadow-sm hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none"
       >
         {submitting ? "保存中..." : submitLabel}
       </button>
@@ -120,12 +120,12 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-stone-800">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-gray-800">{label}</span>
       <input
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
+        className="w-full rounded-lg border border-gray-200 bg-[var(--surface)] px-3 py-2.5 text-gray-900 outline-none transition-shadow focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
       />
     </label>
   );
@@ -144,13 +144,13 @@ function TextArea({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-stone-800">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-gray-800">{label}</span>
       <textarea
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={4}
-        className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
+        className="w-full rounded-lg border border-gray-200 bg-[var(--surface)] px-3 py-2.5 text-gray-900 outline-none transition-shadow focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
       />
     </label>
   );
@@ -169,11 +169,11 @@ function SelectField({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-stone-800">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-gray-800">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
+        className="w-full rounded-lg border border-gray-200 bg-[var(--surface)] px-3 py-2.5 text-gray-900 outline-none transition-shadow focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

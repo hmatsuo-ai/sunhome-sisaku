@@ -65,29 +65,29 @@ export function PolicyComments({ policyId }: PolicyCommentsProps) {
   }
 
   return (
-    <div className="mt-8 border-t border-stone-300/60 pt-6">
-      <h2 className="text-sm font-semibold text-stone-800">コメント</h2>
+    <div className="mt-8 border-t border-gray-200 pt-6">
+      <h2 className="text-sm font-semibold text-gray-900">コメント</h2>
 
       {loading ? (
-        <p className="mt-3 text-sm text-stone-500">読み込み中…</p>
+        <p className="mt-3 text-sm text-gray-500">読み込み中…</p>
       ) : comments.length === 0 ? (
-        <p className="mt-3 text-sm text-stone-600">まだコメントはありません。</p>
+        <p className="mt-3 text-sm text-gray-500">まだコメントはありません。</p>
       ) : (
         <ul className="mt-3 space-y-3">
           {comments.map((c) => (
             <li
               key={c.id}
-              className="rounded-lg border border-stone-300/60 bg-stone-100/80 px-3 py-2.5"
+              className="rounded-xl border border-gray-200 bg-gray-50/90 px-3.5 py-3"
             >
-              <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs text-stone-500">
-                <span className="font-medium text-stone-700">
+              <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs text-gray-500">
+                <span className="font-medium text-gray-800">
                   {c.authorName ?? "（名前なし）"}
                 </span>
                 <time dateTime={c.createdAt}>
                   {new Date(c.createdAt).toLocaleString("ja-JP")}
                 </time>
               </div>
-              <p className="mt-1.5 whitespace-pre-wrap text-sm leading-relaxed text-stone-800">
+              <p className="mt-1.5 whitespace-pre-wrap text-sm leading-relaxed text-gray-900">
                 {c.body}
               </p>
             </li>
@@ -97,34 +97,34 @@ export function PolicyComments({ policyId }: PolicyCommentsProps) {
 
       <form onSubmit={handleSubmit} className="mt-4 space-y-3">
         <label className="block">
-          <span className="mb-1 block text-xs font-medium text-stone-600">
+          <span className="mb-1 block text-xs font-medium text-gray-600">
             お名前（任意）
           </span>
           <input
             type="text"
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
-            className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-sm text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
+            className="w-full rounded-lg border border-gray-200 bg-[var(--surface)] px-3 py-2 text-sm text-gray-900 outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
             placeholder="例: 山田"
             maxLength={120}
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-medium text-stone-600">
+          <span className="mb-1 block text-xs font-medium text-gray-600">
             コメント
           </span>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={3}
-            className="w-full rounded-md border border-stone-300 bg-stone-50/80 px-3 py-2 text-sm text-stone-900 outline-none ring-stone-500/40 focus:ring-2"
+            className="w-full rounded-lg border border-gray-200 bg-[var(--surface)] px-3 py-2 text-sm text-gray-900 outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/20"
             placeholder="進捗・質問・メモなど"
           />
         </label>
         <button
           type="submit"
           disabled={submitting || !body.trim()}
-          className="rounded-md bg-stone-700 px-3 py-1.5 text-sm font-medium text-stone-50 hover:bg-stone-800 disabled:cursor-not-allowed disabled:bg-stone-400"
+          className="rounded-lg bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none"
         >
           {submitting ? "送信中…" : "コメントを追加"}
         </button>

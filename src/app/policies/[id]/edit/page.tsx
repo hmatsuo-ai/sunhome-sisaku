@@ -40,8 +40,8 @@ export default function EditPolicyPage() {
 
   if (!policy) {
     return (
-      <main className="min-h-screen bg-stone-200/80 px-4 py-8">
-        <div className="mx-auto max-w-3xl rounded-xl border border-stone-300/80 bg-stone-50/95 p-6 text-stone-600">
+      <main className="min-h-screen bg-[var(--background)] px-4 py-8">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 text-gray-500">
           読み込み中...
         </div>
       </main>
@@ -49,13 +49,13 @@ export default function EditPolicyPage() {
   }
 
   return (
-    <main className="min-h-screen bg-stone-200/80 px-4 py-8">
-      <div className="mx-auto max-w-3xl rounded-xl border border-stone-300/80 bg-stone-50/95 p-5 shadow-sm md:p-8">
+    <main className="min-h-screen bg-[var(--background)] px-4 py-8">
+      <div className="mx-auto max-w-3xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm md:p-8">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-stone-900">施策の編集</h1>
+          <h1 className="text-[1.375rem] font-semibold text-gray-900">施策の編集</h1>
           <Link
             href="/"
-            className="rounded-md border border-stone-300 bg-stone-100/80 px-3 py-1.5 text-sm text-stone-800 hover:bg-stone-200/80"
+            className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50"
           >
             一覧へ戻る
           </Link>

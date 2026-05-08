@@ -24,33 +24,33 @@ const statusLabel: Record<Policy["status"], string> = {
 export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
   if (!policy) {
     return (
-      <section className="flex flex-1 items-center justify-center bg-stone-200/50 p-6 text-stone-600">
+      <section className="flex flex-1 items-center justify-center bg-[var(--background)] p-6 text-gray-500">
         左の一覧から施策を選択してください。
       </section>
     );
   }
 
   return (
-    <section className="flex flex-1 flex-col bg-stone-200/50 p-5 md:p-8">
+    <section className="flex flex-1 flex-col bg-[var(--background)] p-5 md:p-8">
       <button
         type="button"
         onClick={onBackToList}
-        className="mb-4 w-fit rounded-md border border-stone-300 bg-stone-100 px-3 py-1.5 text-sm text-stone-800 md:hidden"
+        className="mb-4 w-fit rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-medium text-gray-800 shadow-sm md:hidden"
       >
         一覧に戻る
       </button>
 
-      <div className="rounded-xl border border-stone-300/80 bg-stone-50/95 p-5 shadow-sm">
-        <h1 className="text-2xl font-semibold text-stone-900">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm md:p-6">
+        <h1 className="text-[1.375rem] font-semibold text-gray-900">
           {policy.name.trim() || "（名称未設定）"}
         </h1>
-        <p className="mt-2 text-sm text-stone-600">
+        <p className="mt-2 text-sm text-gray-500">
           最終更新日: {new Date(policy.updatedAt).toLocaleDateString("ja-JP")}
         </p>
         <div className="mt-4">
           <Link
             href={`/policies/${policy.id}/edit`}
-            className="inline-flex rounded-md bg-stone-700 px-3 py-1.5 text-sm font-medium text-stone-50 hover:bg-stone-800"
+            className="inline-flex rounded-lg bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-[var(--accent-hover)] active:opacity-90"
           >
             編集
           </Link>
@@ -81,10 +81,10 @@ export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
 function DetailItem({ label, value }: { label: string; value: string }) {
   const empty = value.trim() === "";
   return (
-    <div className="rounded-lg border border-stone-300/60 bg-stone-200/40 p-3">
-      <dt className="text-xs font-medium tracking-wide text-stone-600">{label}</dt>
+    <div className="rounded-xl border border-gray-200 bg-gray-50/80 p-3.5">
+      <dt className="text-xs font-medium tracking-wide text-gray-500">{label}</dt>
       <dd
-        className={`mt-1 text-sm ${empty ? "text-stone-400 italic" : "text-stone-800"}`}
+        className={`mt-1 text-sm ${empty ? "text-gray-400 italic" : "text-gray-900"}`}
       >
         {empty ? "—" : value}
       </dd>
@@ -96,10 +96,10 @@ function LongText({ label, value }: { label: string; value: string }) {
   const empty = value.trim() === "";
   return (
     <div>
-      <h3 className="text-sm font-semibold text-stone-800">{label}</h3>
+      <h3 className="text-sm font-semibold text-gray-900">{label}</h3>
       <p
-        className={`mt-1 whitespace-pre-wrap rounded-lg border border-stone-300/60 bg-stone-100/80 p-3 text-sm leading-6 ${
-          empty ? "text-stone-400 italic" : "text-stone-800"
+        className={`mt-1 whitespace-pre-wrap rounded-xl border border-gray-200 bg-gray-50/90 p-3.5 text-sm leading-relaxed ${
+          empty ? "text-gray-400 italic" : "text-gray-900"
         }`}
       >
         {empty ? "—" : value}

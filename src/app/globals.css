@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e8e6e3;
-  --foreground: #1c1917;
+  /* iOS 系グループド背景に近いニュートラル */
+  --background: #f2f4f8;
+  --foreground: #1f1f1f;
+  --surface: #ffffff;
+  --border: #e0e3e7;
+  --accent: #1a73e8;
+  --accent-hover: #1557b0;
 }
 
 @theme inline {
@@ -15,5 +20,6 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", system-ui, sans-serif;
 }

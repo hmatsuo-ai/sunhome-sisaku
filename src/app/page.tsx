@@ -33,9 +33,9 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-stone-200/80">
-      <header className="border-b border-stone-300/80 bg-stone-100/95 px-5 py-4">
-        <h1 className="text-2xl font-semibold tracking-tight text-stone-800">
+    <main className="min-h-screen bg-[var(--background)]">
+      <header className="border-b border-[var(--border)] bg-[var(--surface)] px-5 py-4">
+        <h1 className="text-[1.375rem] font-semibold tracking-tight text-gray-900">
           施策管理Webアプリ
         </h1>
       </header>
@@ -61,7 +61,7 @@ export default function Home() {
             <div className="px-8 py-4">
               <Link
                 href="/policies/new"
-                className="inline-flex rounded-md bg-stone-700 px-4 py-2 text-sm font-medium text-stone-50 hover:bg-stone-800"
+                className="inline-flex rounded-lg bg-[var(--accent)] px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-[var(--accent-hover)] active:opacity-90"
               >
                 新規施策を作成
               </Link>
