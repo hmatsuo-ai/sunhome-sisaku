@@ -57,6 +57,7 @@ export function PolicyDetail({ policy, onBackToList }: PolicyDetailProps) {
         </div>
 
         <dl className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <DetailItem label="クライアント" value={policy.client?.name ?? ""} />
           <DetailItem label="依頼者の名前" value={policy.requesterName} />
           <DetailItem label="担当者" value={policy.ownerName} />
           <DetailItem label="優先順位" value={priorityLabel[policy.priority]} />

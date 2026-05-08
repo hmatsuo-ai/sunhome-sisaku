@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import type { PolicyInput, PriorityValue, StatusValue } from "./types";
+import type { Client, PolicyInput, PriorityValue, StatusValue } from "./types";
 
 type PolicyFormProps = {
   onSubmit: (payload: PolicyInput) => Promise<void>;
   initialValue?: PolicyInput;
   submitLabel?: string;
+  clients?: Client[];
 };
 
 const defaultValue: PolicyInput = {
+  clientId: null,
   name: "",
   requesterName: "",
   ownerName: "",
@@ -27,6 +29,7 @@ export function PolicyForm({
   onSubmit,
   initialValue,
   submitLabel = "施策を保存",
+  clients = [],
 }: PolicyFormProps) {
   const [form, setForm] = useState<PolicyInput>(initialValue ?? defaultValue);
   const [submitting, setSubmitting] = useState(false);
@@ -47,6 +50,23 @@ export function PolicyForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <Field label="施策の名前" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
+      <SelectField
+        label="クライアント"
+        value={form.clientId === null ? "" : String(form.clientId)}
+        options={[
+          { value: "", label: "未選択" },
+          ...clients.map((client) => ({
+            value: String(client.id),
+            label: client.name,
+          })),
+        ]}
+        onChange={(v) =>
+          setForm({
+            ...form,
+            clientId: v === "" ? null : Number(v),
+          })
+        }
+      />
       <Field
         label="依頼者の名前"
         value={form.requesterName}

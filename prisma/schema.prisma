@@ -25,6 +25,8 @@ enum PolicyStatus {
 
 model Policy {
   id                Int          @id @default(autoincrement())
+  clientId          Int?
+  client            Client?      @relation(fields: [clientId], references: [id], onDelete: SetNull)
   name              String
   requesterName     String
   ownerName         String
@@ -39,6 +41,15 @@ model Policy {
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
   comments          Comment[]
+
+  @@index([clientId])
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  policies  Policy[]
 }
 
 model Comment {

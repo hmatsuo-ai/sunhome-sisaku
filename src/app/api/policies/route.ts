@@ -3,6 +3,7 @@ import { PolicyStatus, Priority } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 type PolicyInput = {
+  clientId: number | null;
   name: string;
   requesterName: string;
   ownerName: string;
@@ -24,7 +25,13 @@ function str(v: unknown): string {
 function normalizePolicyPayload(raw: Partial<PolicyInput>): PolicyInput {
   const p = raw.priority;
   const s = raw.status;
+  const clientIdRaw = raw.clientId;
+  const clientId =
+    typeof clientIdRaw === "number" && Number.isFinite(clientIdRaw)
+      ? clientIdRaw
+      : null;
   return {
+    clientId,
     name: str(raw.name).trim(),
     requesterName: str(raw.requesterName).trim(),
     ownerName: str(raw.ownerName).trim(),
@@ -43,8 +50,18 @@ function normalizePolicyPayload(raw: Partial<PolicyInput>): PolicyInput {
   };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const clientIdParam = searchParams.get("clientId");
+  const clientId = clientIdParam ? Number(clientIdParam) : null;
+
   const policies = await prisma.policy.findMany({
+    where: Number.isFinite(clientId) ? { clientId } : undefined,
+    include: {
+      client: {
+        select: { id: true, name: true },
+      },
+    },
     orderBy: {
       updatedAt: "desc",
     },

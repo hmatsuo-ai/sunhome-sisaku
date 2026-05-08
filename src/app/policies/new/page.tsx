@@ -3,10 +3,22 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PolicyForm } from "@/components/policies/PolicyForm";
-import type { PolicyInput } from "@/components/policies/types";
+import { useEffect, useState } from "react";
+import type { Client, PolicyInput } from "@/components/policies/types";
 
 export default function NewPolicyPage() {
   const router = useRouter();
+  const [clients, setClients] = useState<Client[]>([]);
+
+  useEffect(() => {
+    const loadClients = async () => {
+      const response = await fetch("/api/clients", { cache: "no-store" });
+      if (!response.ok) return;
+      const data = (await response.json()) as Client[];
+      setClients(data);
+    };
+    void loadClients();
+  }, []);
 
   async function handleSubmit(payload: PolicyInput) {
     const response = await fetch("/api/policies", {
@@ -36,7 +48,7 @@ export default function NewPolicyPage() {
             一覧へ戻る
           </Link>
         </div>
-        <PolicyForm onSubmit={handleSubmit} />
+        <PolicyForm onSubmit={handleSubmit} clients={clients} />
       </div>
     </main>
   );

@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { PolicyForm } from "@/components/policies/PolicyForm";
-import type { Policy, PolicyInput } from "@/components/policies/types";
+import type { Client, Policy, PolicyInput } from "@/components/policies/types";
 
 export default function EditPolicyPage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const [policy, setPolicy] = useState<Policy | null>(null);
+  const [clients, setClients] = useState<Client[]>([]);
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
@@ -22,6 +23,16 @@ export default function EditPolicyPage() {
 
     void loadPolicy();
   }, [params.id]);
+
+  useEffect(() => {
+    const loadClients = async () => {
+      const response = await fetch("/api/clients", { cache: "no-store" });
+      if (!response.ok) return;
+      const data = (await response.json()) as Client[];
+      setClients(data);
+    };
+    void loadClients();
+  }, []);
 
   async function handleSubmit(payload: PolicyInput) {
     const response = await fetch("/api/policies", {
@@ -88,6 +99,7 @@ export default function EditPolicyPage() {
 
         <PolicyForm
           initialValue={{
+            clientId: policy.clientId,
             name: policy.name,
             requesterName: policy.requesterName,
             ownerName: policy.ownerName,
@@ -102,6 +114,7 @@ export default function EditPolicyPage() {
           }}
           submitLabel="更新を保存"
           onSubmit={handleSubmit}
+          clients={clients}
         />
         <div className="mt-4 border-t border-[var(--border)] pt-4">
           <button
